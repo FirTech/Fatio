@@ -102,4 +102,6 @@ grub_fs_unregister(grub_fs_t fs)
 
 grub_fs_t EXPORT_FUNC(grub_fs_probe) (grub_disk_t disk);
 
+const char* EXPORT_FUNC(grub_fs_get_name) (grub_disk_t disk);
+
 #endif /* ! GRUB_FS_HEADER */
