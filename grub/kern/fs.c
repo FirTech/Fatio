@@ -70,6 +70,7 @@ grub_fs_probe(grub_disk_t disk)
 const char*
 grub_fs_get_name(grub_disk_t disk)
 {
+	grub_errno = GRUB_ERR_NONE;
 	grub_fs_t fs = grub_fs_probe(disk);
 	grub_errno = GRUB_ERR_NONE;
 	if (!fs)
