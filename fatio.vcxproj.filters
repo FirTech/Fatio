@@ -42,7 +42,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="fatio.c">
+    <ClCompile Include="src\fatio.c">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="fatfs\diskio.c">
@@ -132,55 +132,55 @@
     <ClCompile Include="grub\fs\wim.c">
       <Filter>源文件\grub\fs</Filter>
     </ClCompile>
-    <ClCompile Include="copy.c">
+    <ClCompile Include="src\copy.c">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="ctx.c">
+    <ClCompile Include="src\ctx.c">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="mkdir.c">
+    <ClCompile Include="src\mkdir.c">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="extract.c">
+    <ClCompile Include="src\extract.c">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="dump.c">
+    <ClCompile Include="src\dump.c">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="remove.c">
+    <ClCompile Include="src\remove.c">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="ls.c">
+    <ClCompile Include="src\ls.c">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="move.c">
+    <ClCompile Include="src\move.c">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="cat.c">
+    <ClCompile Include="src\cat.c">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="chmod.c">
+    <ClCompile Include="src\chmod.c">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="setmbr.c">
+    <ClCompile Include="src\setmbr.c">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="setpbr.c">
+    <ClCompile Include="src\setpbr.c">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="grub\fs\ntfs.c">
       <Filter>源文件\grub\fs</Filter>
     </ClCompile>
-    <ClCompile Include="setid.c">
+    <ClCompile Include="src\setid.c">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="setactive.c">
+    <ClCompile Include="src\setactive.c">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="getid.c">
+    <ClCompile Include="src\getid.c">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="swap.c">
+    <ClCompile Include="src\swap.c">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
@@ -272,13 +272,13 @@
     <ClInclude Include="include\dirent.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="resource.h">
+    <ClInclude Include="resources\resource.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="setmbr.h">
+    <ClInclude Include="include\setmbr.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="setpbr.h">
+    <ClInclude Include="include\setpbr.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="include\grub\ntfs.h">
@@ -289,7 +289,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="Resource.rc">
+    <ResourceCompile Include="resources\Resource.rc">
       <Filter>资源文件</Filter>
     </ResourceCompile>
   </ItemGroup>

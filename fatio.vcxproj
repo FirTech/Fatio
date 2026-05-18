@@ -97,22 +97,22 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>$(SolutionDir)target\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)target\$(Platform)\$(Configuration)\obj\</IntDir>
-    <IncludePath>$(VC_LTL_Include);$(IncludePath);$(SolutionDir)include</IncludePath>
+    <IncludePath>$(VC_LTL_Include);$(IncludePath);$(SolutionDir);$(SolutionDir)include</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>$(SolutionDir)target\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)target\$(Platform)\$(Configuration)\obj\</IntDir>
-    <IncludePath>$(VC_LTL_Include);$(IncludePath);$(SolutionDir)include</IncludePath>
+    <IncludePath>$(VC_LTL_Include);$(IncludePath);$(SolutionDir);$(SolutionDir)include</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(SolutionDir)target\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)target\$(Platform)\$(Configuration)\obj\</IntDir>
-    <IncludePath>$(VC_LTL_Include);$(IncludePath);$(SolutionDir)include</IncludePath>
+    <IncludePath>$(VC_LTL_Include);$(IncludePath);$(SolutionDir);$(SolutionDir)include</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>$(SolutionDir)target\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)target\$(Platform)\$(Configuration)\obj\</IntDir>
-    <IncludePath>$(VC_LTL_Include);$(IncludePath);$(SolutionDir)include</IncludePath>
+    <IncludePath>$(VC_LTL_Include);$(IncludePath);$(SolutionDir);$(SolutionDir)include</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -203,15 +203,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="cat.c" />
-    <ClCompile Include="chmod.c" />
-    <ClCompile Include="ctx.c" />
-    <ClCompile Include="getid.c" />
+    <ClCompile Include="src\cat.c" />
+    <ClCompile Include="src\chmod.c" />
+    <ClCompile Include="src\ctx.c" />
+    <ClCompile Include="src\getid.c" />
     <ClCompile Include="grub\fs\ntfs.c" />
-    <ClCompile Include="move.c" />
-    <ClCompile Include="remove.c" />
-    <ClCompile Include="dump.c" />
-    <ClCompile Include="extract.c" />
+    <ClCompile Include="src\move.c" />
+    <ClCompile Include="src\remove.c" />
+    <ClCompile Include="src\dump.c" />
+    <ClCompile Include="src\extract.c" />
     <ClCompile Include="fatfs\diskio.c">
       <TreatWarningAsError Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</TreatWarningAsError>
     </ClCompile>
@@ -221,8 +221,8 @@
     </ClCompile>
     <ClCompile Include="fatfs\ffsystem.c" />
     <ClCompile Include="fatfs\ffunicode.c" />
-    <ClCompile Include="fatio.c" />
-    <ClCompile Include="copy.c" />
+    <ClCompile Include="src\fatio.c" />
+    <ClCompile Include="src\copy.c" />
     <ClCompile Include="grub\disk\loopback.c" />
     <ClCompile Include="grub\disk\windisk.c" />
     <ClCompile Include="grub\fs\exfat.c" />
@@ -248,13 +248,13 @@
     <ClCompile Include="grub\lib\mscompress\xpress.c" />
     <ClCompile Include="grub\partmap\gpt.c" />
     <ClCompile Include="grub\partmap\msdos.c" />
-    <ClCompile Include="ls.c" />
-    <ClCompile Include="mkdir.c" />
-    <ClCompile Include="setactive.c" />
-    <ClCompile Include="setmbr.c" />
-    <ClCompile Include="setid.c" />
-    <ClCompile Include="setpbr.c" />
-    <ClCompile Include="swap.c" />
+    <ClCompile Include="src\ls.c" />
+    <ClCompile Include="src\mkdir.c" />
+    <ClCompile Include="src\setactive.c" />
+    <ClCompile Include="src\setmbr.c" />
+    <ClCompile Include="src\setid.c" />
+    <ClCompile Include="src\setpbr.c" />
+    <ClCompile Include="src\swap.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="fatfs\diskio.h" />
@@ -287,15 +287,15 @@
     <ClInclude Include="include\grub\types.h" />
     <ClInclude Include="include\grub\udf.h" />
     <ClInclude Include="include\loopback.h" />
-    <ClInclude Include="resource.h" />
-    <ClInclude Include="setmbr.h" />
-    <ClInclude Include="setpbr.h" />
+    <ClInclude Include="resources\resource.h" />
+    <ClInclude Include="include\setmbr.h" />
+    <ClInclude Include="include\setpbr.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="Resource.rc" />
+    <ResourceCompile Include="resources\Resource.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
