@@ -15,51 +15,12 @@
 #include "grub/ntfs.h"
 #include <grub/file.h>
 
-const char *
-grub_br_get_fs_type(grub_disk_t disk)
-{
-	int fat_size = 0;
-	struct grub_fat_data *data;
-	grub_uint8_t buf[512];
-
-	// Check if it's NTFS first
-	if (grub_disk_read(disk, 0, 0, sizeof(buf), buf) == 0)
-	{
-		if (grub_memcmp(buf + 3, "NTFS    ", 8) == 0)
-			return "ntfs";
-	}
-
-	// Check other filesystems
-	grub_fs_t fs = grub_fs_probe(disk);
-	if (!fs)
-		return "unknown";
-	if (grub_strcmp(fs->name, "fat") != 0)
-		return fs->name;
-	// handle fat file system
-	data = grub_fat_mount(disk);
-	if (data)
-	{
-		fat_size = data->fat_size;
-		grub_free(data);
-	}
-	switch (fat_size)
-	{
-	case 12:
-		return "fat12";
-	case 16:
-		return "fat16";
-	case 32:
-		return "fat32";
-	}
-	return "error";
-}
-
 grub_disk_addr_t
 grub_br_get_fs_reserved_sectors(grub_disk_t disk)
 {
 	grub_disk_addr_t reserved = 0;
 	grub_uint8_t vbr[GRUB_DISK_SECTOR_SIZE];
-	const char *fs_name = grub_br_get_fs_type(disk);
+	const char *fs_name = grub_fs_get_name(disk);
 	grub_errno = GRUB_ERR_NONE;
 	if (!fs_name)
 		goto out;
@@ -157,10 +118,10 @@ bool fatio_setpbr(unsigned disk_id, unsigned part_id, const wchar_t *in_name)
 	}
 
 	grub_disk_t disk = g_ctx.disk;
+	const char* fs_name = grub_fs_get_name(disk);
 
 	if (_wcsicmp(in_name, L"--nt5") == 0)
 	{
-		const char *fs_name = grub_br_get_fs_type(disk);
 		if (grub_strcmp(fs_name, "fat12") == 0 || grub_strcmp(fs_name, "fat16") == 0)
 		{
 			grub_err_t rc1 = 0, rc2 = 0;
@@ -202,7 +163,6 @@ bool fatio_setpbr(unsigned disk_id, unsigned part_id, const wchar_t *in_name)
 	}
 	else if (_wcsicmp(in_name, L"--nt6") == 0)
 	{
-		const char *fs_name = grub_br_get_fs_type(disk);
 		if (grub_strcmp(fs_name, "fat12") == 0 || grub_strcmp(fs_name, "fat16") == 0)
 		{
 			grub_err_t rc1 = 0, rc2 = 0;
@@ -259,7 +219,6 @@ bool fatio_setpbr(unsigned disk_id, unsigned part_id, const wchar_t *in_name)
 	{
 		grub_uint8_t grldr[5] = {'G', 'R', 'L', 'D', 'R'};
 
-		const char *fs_name = grub_br_get_fs_type(disk);
 		if (grub_strcmp(fs_name, "fat12") == 0 || grub_strcmp(fs_name, "fat16") == 0)
 		{
 			grub_err_t rc1 = 0, rc2 = 0, rc3 = 0;

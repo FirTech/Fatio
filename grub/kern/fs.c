@@ -24,6 +24,7 @@
 #include <grub/misc.h>
 #include <grub/types.h>
 #include <grub/mm.h>
+#include <grub/fat.h>
 
 grub_fs_t grub_fs_list = 0;
 
@@ -64,6 +65,29 @@ grub_fs_probe(grub_disk_t disk)
 
 	grub_error(GRUB_ERR_UNKNOWN_FS, N_("unknown filesystem"));
 	return 0;
+}
+
+const char*
+grub_fs_get_name(grub_disk_t disk)
+{
+	grub_errno = GRUB_ERR_NONE;
+	grub_fs_t fs = grub_fs_probe(disk);
+	grub_errno = GRUB_ERR_NONE;
+	if (!fs)
+		return "unknown";
+
+	// We should return a more specific name for FAT filesystems.
+	if (grub_strcmp(fs->name, "fat") == 0)
+	{
+		int fat_size = grub_fat_get_fat_size(disk);
+		switch (fat_size)
+		{
+		case 12: return "fat12";
+		case 16: return "fat16";
+		case 32: return "fat32";
+		}
+	}
+	return fs->name;
 }
 
 /* Block list support routines.  */

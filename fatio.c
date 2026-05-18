@@ -72,32 +72,9 @@ callback_enum_disk(const char *name, void *data)
     }
 
     // Check filesystem type
-    grub_uint8_t buf[512];
-    if (grub_disk_read(disk, 0, 0, sizeof(buf), buf) == 0)
-    {
-        if (grub_memcmp(buf + 3, "NTFS    ", 8) == 0)
-        {
-            fs = &grub_ntfs_fs;
-        }
-        else
-        {
-            int fat_size = 0;
-            struct grub_fat_data *fsdata;
-            fs = grub_fs_probe(disk);
-            fsdata = grub_fat_mount(disk);
-            if (fsdata)
-            {
-                fat_size = fsdata->fat_size;
-                grub_free(fsdata);
-            }
-            if (fat_size == 12)
-                fs->name = "fat12";
-            else if (fat_size == 16)
-                fs->name = "fat16";
-            else if (fat_size == 32)
-                fs->name = "fat32";
-        }
-    }
+    grub_errno = GRUB_ERR_NONE;
+    fs = grub_fs_probe(disk);
+    grub_errno = GRUB_ERR_NONE;
 
     // filter hard drive
     if (callback_data && callback_data->disk != NULL && grub_strtoul(name + 2, NULL, 10) != wcstoul(callback_data->disk, NULL, 10))
@@ -109,7 +86,7 @@ callback_enum_disk(const char *name, void *data)
     // filter file system
     if (callback_data && callback_data->show_all_hard_drive == false)
     {
-        if (!fs || (grub_strcmp(fs->name, "fat16") == 0 && grub_strcmp(fs->name, "fat32") == 0 && grub_strcmp(fs->name, "exfat") == 0))
+        if (!fs || (grub_strcmp(fs->name, "fat") == 0 && grub_strcmp(fs->name, "exfat") == 0))
         {
             grub_disk_close(disk);
             return 0;
@@ -118,7 +95,7 @@ callback_enum_disk(const char *name, void *data)
 
     grub_printf("%lu\t", grub_strtoul(name + 2, NULL, 10));
     grub_printf("%d\t", disk->partition->number + 1);
-    grub_printf("%s\t", fs ? fs->name : "-");
+    grub_printf("%s\t", grub_fs_get_name(disk));
     grub_printf("%-10s\t", grub_get_human_size(grub_disk_native_sectors(disk) << GRUB_DISK_SECTOR_BITS, GRUB_HUMAN_SIZE_SHORT));
 
     if (fs && fs->fs_label)

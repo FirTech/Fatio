@@ -75,29 +75,8 @@ struct grub_fat_bpb
 };
 GRUB_PACKED_END
 
-struct grub_fat_data
-{
-	int logical_sector_bits;
-	grub_uint32_t num_sectors;
-
-	grub_uint32_t fat_sector;
-	grub_uint32_t sectors_per_fat;
-	int fat_size;  // fat_size
-
-	grub_uint32_t root_cluster;
-#ifndef MODE_EXFAT
-	grub_uint32_t root_sector;
-	grub_uint32_t num_root_sectors;
-#endif
-
-	int cluster_bits;
-	grub_uint32_t cluster_eof_mark;
-	grub_uint32_t cluster_sector;
-	grub_uint32_t num_clusters;
-
-	grub_uint32_t uuid;
-};
-struct grub_fat_data* grub_fat_mount(grub_disk_t disk);
+int
+grub_fat_get_fat_size(grub_disk_t disk);
 
 #ifdef GRUB_UTIL
 #include <grub/disk.h>
