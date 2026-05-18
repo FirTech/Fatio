@@ -203,3 +203,45 @@ fatio.exe swap Disk Part1 Part2
 # Examples:
 # fatio.exe swap 1 1 2
 ```
+
+## build
+
+This project can be built from the command line without opening the Visual Studio IDE, but it still requires the Visual C++ build toolchain.
+
+Requirements:
+
+- Visual Studio 2022 Build Tools (or Visual Studio 2022)
+- MSVC v143 C++ x86/x64 build tools
+- Windows 10/11 SDK
+- NuGet packages restored under `packages\`
+
+Build scripts:
+
+- `build.bat`
+- `build_x86.bat`
+- `build_x64.bat`
+
+Examples:
+
+```bat
+build.bat
+build.bat Rebuild x64 Release
+build.bat Build Win32 Debug
+build_x86.bat
+build_x64.bat
+```
+
+Arguments:
+
+- Build type: `Build`, `Clean`, `Rebuild`
+- Platform: `Win32`, `x64`, `all`, `No32bit`
+- Configuration: `Debug`, `Release`, `LLVMDebug`, `LLVMRelease`, `all`
+
+Output layout:
+
+- Final binaries: `target\<Platform>\<Configuration>\`
+- Intermediate files: `target\<Platform>\<Configuration>\obj\`
+
+## License
+
+General Public License v3.0
