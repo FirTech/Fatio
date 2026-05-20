@@ -1,5 +1,5 @@
 /*-----------------------------------------------------------------------*/
-/* Low level disk I/O module SKELETON for FatFs     (C)ChaN, 2019        */
+/* Low level disk I/O module SKELETON for FatFs     (C)ChaN, 2025        */
 /*-----------------------------------------------------------------------*/
 /* If a working storage control module is available, it should be        */
 /* attached to the FatFs via a glue function rather than modifying it.   */
@@ -9,8 +9,8 @@
 
 #include <time.h>
 
-#include "ff.h"			/* Obtains integer types */
-#include "diskio.h"		/* Declarations of disk functions */
+#include "ff.h"
+#include "diskio.h"
 
 #include <fatio.h>
 #include <locale.h>
@@ -24,10 +24,13 @@ DSTATUS disk_status (
 	BYTE pdrv		/* Physical drive nmuber to identify the drive */
 )
 {
+	(void)pdrv;
 	if (g_ctx.disk == NULL)
 		return STA_NOINIT;
 	return RES_OK;
 }
+
+
 
 /*-----------------------------------------------------------------------*/
 /* Inidialize a Drive                                                    */
@@ -37,10 +40,13 @@ DSTATUS disk_initialize (
 	BYTE pdrv				/* Physical drive nmuber to identify the drive */
 )
 {
+	(void)pdrv;
 	if (g_ctx.disk == NULL)
 		return STA_NOINIT;
 	return RES_OK;
 }
+
+
 
 /*-----------------------------------------------------------------------*/
 /* Read Sector(s)                                                        */
@@ -55,6 +61,7 @@ DRESULT disk_read (
 {
 	grub_size_t size = count << GRUB_DISK_SECTOR_BITS;
 
+	(void)pdrv;
 	if (g_ctx.disk == NULL)
 		return RES_NOTRDY;
 	if (sector > g_ctx.total_sectors)
@@ -64,6 +71,8 @@ DRESULT disk_read (
 		return RES_OK;
 	return RES_ERROR;
 }
+
+
 
 /*-----------------------------------------------------------------------*/
 /* Write Sector(s)                                                       */
@@ -80,6 +89,7 @@ DRESULT disk_write (
 {
 	grub_size_t size = count << GRUB_DISK_SECTOR_BITS;
 
+	(void)pdrv;
 	if (g_ctx.disk == NULL)
 		return RES_NOTRDY;
 	if (sector > g_ctx.total_sectors)
@@ -104,6 +114,7 @@ DRESULT disk_ioctl (
 	void *buff		/* Buffer to send/receive control data */
 )
 {
+	(void)pdrv;
 	if (g_ctx.disk == NULL)
 		return RES_NOTRDY;
 	switch (cmd)
@@ -130,9 +141,8 @@ DWORD get_fattime(void)
 {
 	SYSTEMTIME tm;
 
-	/* Get local time */
 	GetLocalTime(&tm);
 
-	/* Pack date and time into a DWORD variable */
-	return   (tm.wYear - 1980) << 25 | tm.wMonth << 21 | tm.wDay << 16 | tm.wHour << 11 | tm.wMinute << 5 | tm.wSecond >> 1;
+	return (tm.wYear - 1980) << 25 | tm.wMonth << 21 | tm.wDay << 16 | tm.wHour << 11 | tm.wMinute << 5 | tm.wSecond >> 1;
 }
+
